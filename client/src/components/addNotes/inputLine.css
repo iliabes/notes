@@ -1,0 +1,42 @@
+.cont-add-notes {
+    margin-top: 15px;
+    border: 1px solid #fff;
+    display: inline-block;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: 0 auto;
+    z-index: 999;
+}
+
+.note-input {
+    margin: 10px;
+    background-color: #282c34;
+}
+
+.note-input-header {
+    min-height: 30px;
+}
+
+.note-input-content {
+    min-height: 100px;
+}
+
+.overlay {
+    position: absolute;
+    margin: 100px auto;
+    margin-left: 20%;
+    background-color: #282c34;
+}
+
+.add-notes-overlay {
+    position: fixed;
+    background: rgba(118, 163, 206, 0.642);
+    opacity: 1;
+    height: 100vh;
+    width: 100%;
+    left: 0;
+    top: 0;
+
+}
