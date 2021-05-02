@@ -4,17 +4,21 @@ let app = express();
 let cookieParser = require('cookie-parser');
 let indexRouter = require('./routes/index');
 let usersRouter = require('./routes/users');
-var cors = require('cors');
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
-const port = 4000 || process.env.PORT;
+let cors = require('cors');
+let mongoose = require("mongoose");
+let Schema = mongoose.Schema;
+let port = 4000 || process.env.PORT;
 
 
+app.use(cors());
+app.use(express.urlencoded({extended:false}))
+app.use(express.json())
 app.use(express.static(__dirname +'/client/build/'))
+
+
 app.use('/', indexRouter);
-// app.use(cors());
-// app.use(express.urlencoded({extended:false}))
-// app.use(express.json())
+
+
 
 
 async function start() {
@@ -23,7 +27,7 @@ async function start() {
     .then(()=>{console.log('mongoose connected')})
     app.listen(port,console.log(`server is starting in ${port}` ))
   } catch (e) {
-    console.log(e)
+    console.log('error:'+e)
   }
 }start()
 

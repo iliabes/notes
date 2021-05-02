@@ -6,6 +6,7 @@ const todoScheme = new Schema({
   value: String,
 })
 
+const Todo  = mongoose.model("Todo", todoScheme);
 
-
-module.export = todoScheme;
+//!!!s
+module.exports = Todo;

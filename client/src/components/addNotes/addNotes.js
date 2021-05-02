@@ -1,32 +1,37 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import './inputLine.css'
-import ButtonAdd from '../buttonAdd/buttonAdd'
+import React, { useState,useContext  } from 'react';
 
-function NotesAdd(){
+import './inputLine.sass'
+import ButtonAdd from '../buttonAddNotes/buttonAdd'
+import {RefreshState} from '../../context/RefreshContext'
+
+function NotesAdd(props){
+  const init = useContext(RefreshState);
   const [click, setClick] = useState(0);
   let data = {
     header:'',
     value:''
   }
 
-  async function  netReqvest(){
+  async function  createNote(){
     if(data.header || data.value){
-      let response = await fetch('http://localhost:4000', {
+        await fetch('http://localhost:4000', {
         method: 'post',
         headers: {
           'Content-Type': 'application/json;charset=utf-8'
         },
         body: JSON.stringify(data)
-      });
-      
+      })
+      .then((data)=>{console.log(data)})
     }
-
+      init.startUpdate()
   }
+
+
   if(click){
     return (
       <>
-      <div onClick={()=>{setClick(0);netReqvest()}} className="add-notes-overlay "></div>
+      <div onClick={()=>{setClick(0);createNote()}} className="add-notes-overlay ">
+      </div>
       <div className='cont-add-notes overlay'>
         <input onChange={function bla(e){data.header = e.target.value;console.log(data)}} className='note-input note-input-header' type='text' placeholder="Заметка.."></input>
         <input onChange={function bla(e){data.value = e.target.value;console.log(data)}} className='note-input note-input-content' type='text' placeholder="Заметка.."></input>
@@ -42,8 +47,6 @@ function NotesAdd(){
       </div>
     )
   }
-
-
 }
 
 export default NotesAdd

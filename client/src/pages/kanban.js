@@ -1,5 +1,5 @@
 import React from 'react';
-import InputLine from '../components/inputLine/inputLine'
+import InputLine from '../components/topNav/topNav'
 
 export const  Kanban = () =>{
   return (
@@ -8,6 +8,5 @@ export const  Kanban = () =>{
     <h1>this is kanban</h1>
     </>
   )
-
 }
 

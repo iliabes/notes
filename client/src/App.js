@@ -1,13 +1,11 @@
 
 import './App.css';
-import Notes from './components/notes/notes'
-import InputLine from './components/inputLine/inputLine'
-import NavSide from './components/navSide'
-import AddNotes from './components/addNotes/inputLine'
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 import {Kanban} from './pages/kanban'
 import {Todo} from './pages/todo'
 import {NotesMain} from './pages/notes'
+
+
 
 function App() {
   return (

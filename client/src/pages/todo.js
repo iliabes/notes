@@ -1,5 +1,5 @@
 import React from 'react';
-import InputLine from '../components/inputLine/inputLine'
+import InputLine from '../components/topNav/topNav'
 
 export const Todo =() =>{
   return (
