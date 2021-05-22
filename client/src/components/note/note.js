@@ -1,12 +1,14 @@
-import React, { useState,useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import redeser from '../../context/redeser'
-
+import axios from 'axios';
 import './note.sass'
 import back from '../../img/icon/hidden.png'
 import del from '../../img/icon/020-katana.png'
-import {RefreshState} from '../../context/RefreshContext'
+import { RefreshState } from '../../context/RefreshContext'
+import { connect } from 'react-redux'
 
-function Note(props){
+
+function Note(props) {
     const init = useContext(RefreshState);
     const [clas, setClass] = useState('note');
     const [wasHeader, setWasHeader] = useState();
@@ -16,73 +18,97 @@ function Note(props){
     const [flag, setFlag] = useState(0);
     const [id, setId] = useState(props.item._id);
     let bla = 0;
-    function expandNote(bla){
+
+    async function getNotes() {
+        const result = await axios('/bd');
+        props.getAllnotes(result.data)
+    }
+
+    function expandNote(bla) {
         console.log(clas)
         setClass('note note-expand')
     }
-    async function  netReqvest(id){
-          let response = await fetch('http://localhost:4000', {
+
+    async function netReqvest(id) {
+        let response = await fetch('http://localhost:4000', {
             method: 'delete',
             headers: {
-              'Content-Type': 'application/json;charset=utf-8'
+                'Content-Type': 'application/json;charset=utf-8'
             },
-            body: JSON.stringify({'id':id})
-          });
-      }
-      async function  Update(id,header,value){
-        let response = await fetch('http://localhost:4000', {
-          method: 'put',
-          headers: {
-            'Content-Type': 'application/json;charset=utf-8'
-          },
-          body: JSON.stringify({'id':id,'header':header,'value':value})
+            body: JSON.stringify({ 'id': id })
         });
+        let commits = await response.json()
+        if (commits.ok === 'ok') {
+            props.startUpdate()
+        }
     }
-    function writeNow(e){
+
+    async function Update(id, header, value) {
+        let response = await fetch('http://localhost:4000', {
+            method: 'put',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({ 'id': id, 'header': header, 'value': value })
+        });
+
+    }
+    function writeNow(e) {
         console.log(id)
         setClass('note note-expand')
         let parentUl = e.target.parentElement.parentElement
-        if(flag !== 1){
+        if (flag !== 1) {
             setWasHeader(parentUl.children[0].children[0].value)
             setWasValue(parentUl.children[1].children[0].value)
         }
         setFlag(1)
 
     }
-    function changeNow(e){
+    function changeNow(e) {
         let parentUl = e.target.parentElement.parentElement.parentElement
         setNowHeader(parentUl.children[0].children[0].value)
         setNowValue(parentUl.children[1].children[0].value)
-        if((wasHeader !== parentUl.children[0].children[0].value) || (wasValue !== parentUl.children[1].children[0].value)){
-            Update(id,parentUl.children[0].children[0].value,parentUl.children[1].children[0].value)
-            props.funcitonTest()
+        if ((wasHeader !== parentUl.children[0].children[0].value) || (wasValue !== parentUl.children[1].children[0].value)) {
+            Update(id, parentUl.children[0].children[0].value, parentUl.children[1].children[0].value)
+            // props.funcitonTest()
         }
-        setWasHeader();setWasValue();
-        setNowValue();setNowHeader();
+        setWasHeader(); setWasValue();
+        setNowValue(); setNowHeader();
         setFlag(0)
     }
 
-    function findId(e){
+    function findId(e) {
         netReqvest(id)
     }
     return (
-            <ul  id={props.item._id} className={clas}>
-                <div onClick={(e)=>{writeNow(e)}} className='top-container'>
-                    <textarea defaultValue={props.item.header}></textarea>
-                </div>
-                <div onClick={(e)=>{writeNow(e)}} className='content-container'>
-                    <textarea defaultValue={props.item.value}></textarea>
-                </div>
-                <div className='bottom-container'>
-                <button><img  alt="button back" onClick={(e)=>{setClass('note');changeNow(e);}} src={back}></img></button>
-                <button className='del'><img alt="button delete" onClick={(e)=>{findId(e);init.startUpdate()}} src={del}></img></button>
-                </div>
-            </ul>
+        <ul id={props.item._id} className={clas}>
+            <div onClick={(e) => { writeNow(e) }} className='top-container'>
+                <textarea defaultValue={props.item.header}></textarea>
+            </div>
+            <div onClick={(e) => { writeNow(e) }} className='content-container'>
+                <textarea defaultValue={props.item.value}></textarea>
+            </div>
+            <div className='bottom-container'>
+                <button><img alt="button back" onClick={(e) => { setClass('note'); changeNow(e); }} src={back}></img></button>
+                <button className='del'><img alt="button delete" onClick={(e) => { findId(e); init.startUpdate() }} src={del}></img></button>
+            </div>
+        </ul>
     )
 
 
 }
-export default  Note
+
+export default connect(
+    state => ({
+        testStore: state
+    }),
+    dispatch => ({
+        startUpdate: () => {
+            dispatch({ type: 'START_UPDATE' });
+        },
+    })
+)(Note);
+
 
 
 

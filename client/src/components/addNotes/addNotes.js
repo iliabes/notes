@@ -1,55 +1,80 @@
-import React, { useState,useContext  } from 'react';
-
+import React, { useState, useContext } from 'react';
+import { connect } from 'react-redux'
 import './inputLine.sass'
 import ButtonAdd from '../buttonAddNotes/buttonAdd'
-import {RefreshState} from '../../context/RefreshContext'
+import { RefreshState } from '../../context/RefreshContext'
+import axios from 'axios';
 
-function NotesAdd(props){
+
+
+
+function NotesAdd(props) {
+  console.log(props)
   const init = useContext(RefreshState);
   const [click, setClick] = useState(0);
   let data = {
-    header:'',
-    value:''
+    header: '',
+    value: ''
   }
 
-  async function  createNote(){
-    if(data.header || data.value){
-        await fetch('http://localhost:4000', {
+  async function getNotes() {
+    const result = await axios('/bd');
+    props.getAllnotes(result.data)
+  }
+
+  async function createNote() {
+    if (data.header || data.value) {
+      await fetch('http://localhost:4000', {
         method: 'post',
         headers: {
           'Content-Type': 'application/json;charset=utf-8'
         },
         body: JSON.stringify(data)
       })
-      .then((data)=>{console.log(data)})
+        .then((data) => {
+          props.startUpdate()
+          console.log(data)
+        })
     }
-      init.startUpdate()
+    console.log(props)
   }
 
 
-  if(click){
+  if (click) {
     return (
       <>
-      <div onClick={()=>{setClick(0);createNote()}} className="add-notes-overlay ">
-      </div>
-      <div className='cont-add-notes overlay'>
-        <input onChange={function bla(e){data.header = e.target.value;console.log(data)}} className='note-input note-input-header' type='text' placeholder="Заметка.."></input>
-        <input onChange={function bla(e){data.value = e.target.value;console.log(data)}} className='note-input note-input-content' type='text' placeholder="Заметка.."></input>
-      </div>
+        <div onClick={() => { setClick(0); createNote() }} className="add-notes-overlay ">
+        </div>
+        <div className='cont-add-notes overlay'>
+          <input onChange={function bla(e) { data.header = e.target.value; console.log(data) }} className='note-input note-input-header' type='text' placeholder="Заметка.."></input>
+          <input onChange={function bla(e) { data.value = e.target.value; console.log(data) }} className='note-input note-input-content' type='text' placeholder="Заметка.."></input>
+        </div>
 
       </>
     )
-  }else{
+  } else {
     return (
       <div className='cont-add-notes'>
-        <input className='note-input' onClick={()=>{setClick(1)}} type='text' placeholder="Заголовок.."></input>
-        <ButtonAdd onClick={()=>{setClick(1)}}></ButtonAdd>
+        <input className='note-input' onClick={() => { setClick(1) }} type='text' placeholder="Заголовок.."></input>
+        <ButtonAdd onClick={() => { setClick(1) }}></ButtonAdd>
       </div>
     )
   }
 }
 
-export default NotesAdd
+export default connect(
+  state => ({
+    testStore: state
+  }),
+  dispatch => ({
+    getAllnotes: (notes) => {
+      dispatch({ type: 'GET_NOTES', payload: notes });
+    },
+    startUpdate: () => {
+      dispatch({ type: 'START_UPDATE' });
+    }
+  })
+)(NotesAdd);
 
 
 
