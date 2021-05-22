@@ -6,6 +6,8 @@ import back from '../../img/icon/hidden.png'
 import del from '../../img/icon/020-katana.png'
 import { RefreshState } from '../../context/RefreshContext'
 import { connect } from 'react-redux'
+import anime from 'animejs/lib/anime.es.js';
+
 
 
 function Note(props) {
@@ -23,6 +25,15 @@ function Note(props) {
         const result = await axios('/bd');
         props.getAllnotes(result.data)
     }
+
+    function anim(){
+        anime({
+            targets: '#test',
+            translateX: 250
+          });
+        
+    }
+    
 
     function expandNote(bla) {
         console.log(clas)
@@ -64,6 +75,7 @@ function Note(props) {
         setFlag(1)
 
     }
+
     function changeNow(e) {
         let parentUl = e.target.parentElement.parentElement.parentElement
         setNowHeader(parentUl.children[0].children[0].value)
@@ -81,18 +93,18 @@ function Note(props) {
         netReqvest(id)
     }
     return (
-        <ul id={props.item._id} className={clas}>
-            <div onClick={(e) => { writeNow(e) }} className='top-container'>
-                <textarea defaultValue={props.item.header}></textarea>
+        <div>
+        <div id={props.item._id} className='note'>
+            <div className="container-content">
+                <input type='checkbox'/>
+                <div className="note-content">
+                    <p>{props.item.header}</p>
+                </div>
+                <button className="btn-del"><img alt="button delete"  src={del}/></button>
             </div>
-            <div onClick={(e) => { writeNow(e) }} className='content-container'>
-                <textarea defaultValue={props.item.value}></textarea>
             </div>
-            <div className='bottom-container'>
-                <button><img alt="button back" onClick={(e) => { setClass('note'); changeNow(e); }} src={back}></img></button>
-                <button className='del'><img alt="button delete" onClick={(e) => { findId(e); init.startUpdate() }} src={del}></img></button>
+            <div onClick={anim} id='test' className='note'>123</div>
             </div>
-        </ul>
     )
 
 
@@ -113,3 +125,15 @@ export default connect(
 
 
 
+// <ul id={props.item._id} className={clas}>
+// <div onClick={(e) => { writeNow(e) }} className='top-container'>
+//     <textarea defaultValue={props.item.header}></textarea>
+// </div>
+// <div onClick={(e) => { writeNow(e) }} className='content-container'>
+//     <textarea defaultValue={props.item.value}></textarea>
+// </div>
+// <div className='bottom-container'>
+//     <button><img alt="button back" onClick={(e) => { setClass('note'); changeNow(e); }} src={back}></img></button>
+//     <button className='del'><img alt="button delete" onClick={(e) => { findId(e); init.startUpdate() }} src={del}></img></button>
+// </div>
+// </ul>
