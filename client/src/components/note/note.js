@@ -26,14 +26,14 @@ function Note(props) {
         props.getAllnotes(result.data)
     }
 
-    function anim(){
+    function anim() {
         anime({
             targets: '#test',
             translateX: 250
-          });
-        
+        });
+
     }
-    
+
 
     function expandNote(bla) {
         console.log(clas)
@@ -62,8 +62,8 @@ function Note(props) {
             },
             body: JSON.stringify({ 'id': id, 'header': header, 'value': value })
         });
-
     }
+
     function writeNow(e) {
         console.log(id)
         setClass('note note-expand')
@@ -94,17 +94,17 @@ function Note(props) {
     }
     return (
         <div>
-        <div id={props.item._id} className='note'>
-            <div className="container-content">
-                <input type='checkbox'/>
-                <div className="note-content">
-                    <p>{props.item.header}</p>
+            <div id={props.item._id} className='note'>
+                <div className="container-content">
+                    <input type='checkbox' />
+                    <div className="note-content">
+                        <p>{props.item.header}</p>
+                    </div>
+                    <button className="btn-del"><img alt="button delete" src={del} /></button>
                 </div>
-                <button className="btn-del"><img alt="button delete"  src={del}/></button>
-            </div>
             </div>
             <div onClick={anim} id='test' className='note'>123</div>
-            </div>
+        </div>
     )
 
 
