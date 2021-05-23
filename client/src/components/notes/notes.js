@@ -47,9 +47,10 @@ function Notes(props) {
 
     if (props.notes.length != 0) {
         console.log(props.notes)
-        const listItems = props.testStore.reduser[0].map((number) =>
-            <Note key={number._id} item={number} ></Note>
+        const listItems = props.testStore.reduser[0].map((number,index) =>
+            <Note key={index} item={number} ></Note>
         );
+
         return (
             <div className="notes">
                 {listItems}
@@ -66,11 +67,6 @@ function Notes(props) {
             </div>
         )
     }
-
-
-
-
-
 }
 
 

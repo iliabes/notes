@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, u } from 'react';
 import redeser from '../../context/redeser'
 import axios from 'axios';
 import './note.sass'
@@ -26,13 +26,7 @@ function Note(props) {
         props.getAllnotes(result.data)
     }
 
-    function anim() {
-        anime({
-            targets: '#test',
-            translateX: 250
-        });
 
-    }
 
 
     function expandNote(bla) {
@@ -92,9 +86,51 @@ function Note(props) {
     function findId(e) {
         netReqvest(id)
     }
+
+        // function anim(elem) {
+        // let goal = document.getElementById(elem)
+        // console.log(elem,goal)
+        // goal.style.transform = "translateX(1300px)"
+        // let promise = new Promise((res,rej)=>{
+        //     setTimeout(()=>{
+        //         console.log('animate');
+        //         res('win')
+        //     },2000)
+            
+        // })
+        // promise
+        //     .then(()=>{
+        //         netReqvest(elem)
+        //         goal.style.transform = "translateX(0px)"
+                
+        //     })
+        // }
+
+
+function anim(elem) {
+        let goal = document.getElementById(elem)
+        console.log(elem,goal)
+        anime({
+            targets: goal,
+            translateX: 1550,
+            update: function() {
+                console.log('update')
+              },
+              begin: function() {
+
+              },
+              complete: function() {
+                netReqvest(elem)
+                goal.style.translate = 'transitionX(100px)'
+              }
+
+        });
+    }
+
     return (
         <div>
-            <div id={props.item._id} className='note'>
+            <div id={props.item._id} onClick={()=>{anim(props.item._id)}} className={'note  ' + 'animate'+props.item._id}>
+            {console.log(props.key)}
                 <div className="container-content">
                     <input type='checkbox' />
                     <div className="note-content">
@@ -103,7 +139,6 @@ function Note(props) {
                     <button className="btn-del"><img alt="button delete" src={del} /></button>
                 </div>
             </div>
-            <div onClick={anim} id='test' className='note'>123</div>
         </div>
     )
 
@@ -137,3 +172,24 @@ export default connect(
 //     <button className='del'><img alt="button delete" onClick={(e) => { findId(e); init.startUpdate() }} src={del}></img></button>
 // </div>
 // </ul>
+
+
+    // function anim(elem) {
+    //     let goal = document.getElementById(elem)
+    //     console.log(elem,goal)
+    //     anime({
+    //         targets: goal,
+    //         translateX: 1550,
+    //         position:'absolute',
+    //         update: function() {
+    //             console.log('update')
+    //           },
+    //           begin: function() {
+    //             goal.style.position = 'absolute';
+    //           },
+    //           complete: function() {
+    //             netReqvest(elem)
+    //           }
+
+    //     });
+    // }
