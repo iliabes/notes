@@ -7,7 +7,7 @@ import del from '../../img/icon/020-katana.png'
 import { RefreshState } from '../../context/RefreshContext'
 import { connect } from 'react-redux'
 import anime from 'animejs/lib/anime.es.js';
-
+import { CSSTransitionGroup } from 'react-transition-group'
 
 
 function Note(props) {
@@ -87,59 +87,61 @@ function Note(props) {
         netReqvest(id)
     }
 
-        // function anim(elem) {
-        // let goal = document.getElementById(elem)
-        // console.log(elem,goal)
-        // goal.style.transform = "translateX(1300px)"
-        // let promise = new Promise((res,rej)=>{
-        //     setTimeout(()=>{
-        //         console.log('animate');
-        //         res('win')
-        //     },2000)
-            
-        // })
-        // promise
-        //     .then(()=>{
-        //         netReqvest(elem)
-        //         goal.style.transform = "translateX(0px)"
-                
-        //     })
-        // }
+    // function anim(elem) {
+    // let goal = document.getElementById(elem)
+    // console.log(elem,goal)
+    // goal.style.transform = "translateX(1300px)"
+    // let promise = new Promise((res,rej)=>{
+    //     setTimeout(()=>{
+    //         console.log('animate');
+    //         res('win')
+    //     },2000)
+
+    // })
+    // promise
+    //     .then(()=>{
+    //         netReqvest(elem)
+    //         goal.style.transform = "translateX(0px)"
+
+    //     })
+    // }
 
 
-function anim(elem) {
+    function anim(elem) {
         let goal = document.getElementById(elem)
-        console.log(elem,goal)
+        console.log(elem, goal)
         anime({
             targets: goal,
             translateX: 1550,
-            update: function() {
+            update: function () {
                 console.log('update')
-              },
-              begin: function() {
+            },
+            begin: function () {
 
-              },
-              complete: function() {
-                netReqvest(elem)
-                goal.style.translate = 'transitionX(100px)'
-              }
+            },
+            complete: function () {
+                // netReqvest(elem)
+                goal.style.transform = 'transitionX(100px)'
+            }
 
         });
     }
 
     return (
-        <div>
-            <div id={props.item._id} onClick={()=>{anim(props.item._id)}} className={'note  ' + 'animate'+props.item._id}>
-            {console.log(props.key)}
-                <div className="container-content">
-                    <input type='checkbox' />
-                    <div className="note-content">
-                        <p>{props.item.header}</p>
+        <CSSTransitionGroup transitionName="example">
+            <div>
+                <div id={props.item._id} onClick={() => { anim(props.item._id) }} className={'note  ' + 'animate' + props.item._id}>
+                    {console.log(props.key)}
+                    <div className="container-content">
+                        <input type='checkbox' />
+                        <div className="note-content">
+                            <p>{props.item.header}</p>
+                        </div>
+                        <button className="btn-del"><img alt="button delete" src={del} /></button>
                     </div>
-                    <button className="btn-del"><img alt="button delete" src={del} /></button>
                 </div>
             </div>
-        </div>
+        </CSSTransitionGroup>
     )
 
 
