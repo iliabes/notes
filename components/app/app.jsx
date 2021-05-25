@@ -1,5 +1,8 @@
-import React from "react";
+import React from 'react';
 import Note from '../note/note.jsx'
+import './app.sass'
+
+
 
 let items = [
    { 'header': "item1" },
@@ -10,17 +13,19 @@ let items = [
 
 
 function App() {
+   let notes = items.map((item, index) => {
+      return <Note key={index} header={item.header}></Note>
+      console.log(notes)
+   })
 
-   // let items = items.map((item, index) => {
-   //    <Note header={item.header}></Note>
-   // })
+
    return (
       <div>
-         <b>Hello world!</b>
-         <Note header={'1'}></Note>
-         <Note header={'2'}></Note>
-         <Note header={'3'}></Note>
-         <Note header={'4'}></Note>
+
+      <div className='notes'>
+         {notes}
+      </div>
+
       </div>
    )
 }
