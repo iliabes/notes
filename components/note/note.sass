@@ -1,0 +1,41 @@
+.note
+    background-color: #fff
+    padding: 5px
+    display: block
+    border-radius: 3px
+    height: 60px
+    transform: translateX(0px)
+
+    .container-content
+        display: flex
+        flex-direction: row
+        justify-content: space-between
+        align-items: center
+        text-align: left
+        .note-content
+            width: 90%
+
+            .note-text
+                width: 90%
+                border-style: none
+                font-size: 20px
+                border-width: 0px
+                border: none
+            .gro
+                font-size: 12px
+        .btn-del
+            img
+                width: 10px
+                height: 10px
+
+.example-enter
+    opacity: 0.01
+    &.example-enter-active
+        opacity: 1
+        transition: opacity 500ms ease-in
+
+.example-leave
+    opacity: 1
+    &.example-leave-active
+        opacity: 0.01
+        transition: opacity 300ms ease-in

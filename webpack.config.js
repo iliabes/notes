@@ -12,16 +12,28 @@ module.exports = {
     compress: true,
     port: 9000,
   },
-  module:{
-    rules:[   //загрузчик для jsx
-        {
-            test: /\.jsx?$/, // определяем тип файлов
-            exclude: /(node_modules)/,  // исключаем из обработки папку node_modules
-            loader: "babel-loader",   // определяем загрузчик
-            options:{
-                presets:["@babel/preset-env", "@babel/preset-react"]    // используемые плагины
-            }
+  module: {
+    rules: [   //загрузчик для jsx
+      {
+        test: /\.jsx?$/, // определяем тип файлов
+        exclude: /(node_modules)/,  // исключаем из обработки папку node_modules
+        loader: "babel-loader",   // определяем загрузчик
+        options: {
+          presets: ["@babel/preset-env", "@babel/preset-react"]    // используемые плагины
         }
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+
+          "style-loader",
+
+          "css-loader",
+
+          "sass-loader",
+
+        ],
+      }
     ]
-}
+  }
 };
