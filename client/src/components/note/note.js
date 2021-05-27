@@ -1,4 +1,4 @@
-import React, { useState, useContext, u } from 'react';
+import React, { useState, useContext } from 'react';
 import redeser from '../../context/redeser'
 import axios from 'axios';
 import './note.sass'
@@ -6,12 +6,12 @@ import back from '../../img/icon/hidden.png'
 import del from '../../img/icon/020-katana.png'
 import { RefreshState } from '../../context/RefreshContext'
 import { connect } from 'react-redux'
-import anime from 'animejs/lib/anime.es.js';
-import { CSSTransitionGroup } from 'react-transition-group'
-
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { Container, Button, Alert } from 'react-bootstrap';
 
 function Note(props) {
     const init = useContext(RefreshState);
+    const [showMessage, setShowMessage] = useState(false);
     const [clas, setClass] = useState('note');
     const [wasHeader, setWasHeader] = useState();
     const [nowHeader, setNowHeader] = useState();
@@ -107,41 +107,30 @@ function Note(props) {
     // }
 
 
-    function anim(elem) {
-        let goal = document.getElementById(elem)
-        console.log(elem, goal)
-        anime({
-            targets: goal,
-            translateX: 1550,
-            update: function () {
-                console.log('update')
-            },
-            begin: function () {
 
-            },
-            complete: function () {
-                // netReqvest(elem)
-                goal.style.transform = 'transitionX(100px)'
-            }
-
-        });
-    }
 
     return (
-        <CSSTransitionGroup transitionName="example">
-            <div>
-                <div id={props.item._id} onClick={() => { anim(props.item._id) }} className={'note  ' + 'animate' + props.item._id}>
-                    {console.log(props.key)}
-                    <div className="container-content">
-                        <input type='checkbox' />
-                        <div className="note-content">
-                            <p>{props.item.header}</p>
-                        </div>
-                        <button className="btn-del"><img alt="button delete" src={del} /></button>
+        <Container style={{ paddingTop: '2rem' }}>
+            {/* <CSSTransition
+                in={showMessage}
+                classNames='bla'
+                timeout={300}
+                onEnter={() => { alert('111'); setShowMessage(false) }}
+            > */}
+
+            <div id={props.item._id} onClick={() => { }} className={'note'}>
+                {console.log(props.key)}
+                <div className="container-content">
+                    <input type='checkbox' />
+                    <div className="note-content">
+                        <p>{props.item.header}</p>
                     </div>
+                    <button onClick={() => { setShowMessage(true); alert(showMessage); }} className="btn-del"><img alt="button delete" src={del} /></button>
                 </div>
             </div>
-        </CSSTransitionGroup>
+            {/* </CSSTransition > */}
+        </Container>
+
     )
 
 

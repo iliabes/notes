@@ -1,16 +1,24 @@
 
+import { store } from '../../redux/index'
 import React, { useState, useEffect, useContext } from 'react';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import axios from 'axios';
 import Note from '../note/note'
 import { RefreshState } from '../../context/RefreshContext'
 import { connect } from 'react-redux'
 import './notes.sass'
-import { store } from '../../redux/index'
+
+
+
 
 async function getNotes() {
     const result = await axios('/bd');
+    console.log('result.data', result.data)
     store.dispatch({ type: 'GET_NOTES', payload: result.data });
-} getNotes()
+    console.log('result.data', result.data)
+
+}
+getNotes()
 
 
 function Notes(props) {
@@ -37,24 +45,32 @@ function Notes(props) {
     // })
 
     console.log(props)
-    async function getNotes() {
-        const result = await axios('/bd');
-        props.getAllnotes(result.data)
-        console.log('UpdateNotes', props.updateNotes())
-    }
+    // async function getNotes() {
+    //     const result = await axios('/bd');
+    //     props.getAllnotes(result.data)
+    //     console.log('UpdateNotes', props.updateNotes())
+    // }
 
     console.log(props.notes.length != 0)
 
     if (props.notes.length != 0) {
         console.log(props.notes)
-        const listItems = props.testStore.reduser[0].map((number,index) =>
+        const listItems = props.testStore.reduser[0].map((number, index) =>
             <Note key={index} item={number} ></Note>
         );
 
         return (
             <div className="notes">
-                {listItems}
-                <p onClick={() => { props.updateNotes2() }}>Лоадинг , плис вейт</p>
+                <TransitionGroup>
+                    <CSSTransition
+                        in={false}
+                        classNames='bla'
+                        timeout={300}
+                        onEnter={() => { alert('111'); }}
+                    >
+                        {listItems}
+                    </CSSTransition>
+                </TransitionGroup>
             </div>
         )
     } else {
