@@ -111,24 +111,23 @@ function Note(props) {
 
     return (
         <Container style={{ paddingTop: '2rem' }}>
-            {/* <CSSTransition
+            <CSSTransition
                 in={showMessage}
                 classNames='bla'
-                timeout={300}
-                onEnter={() => { alert('111'); setShowMessage(false) }}
-            > */}
-
-            <div id={props.item._id} onClick={() => { }} className={'note'}>
-                {console.log(props.key)}
-                <div className="container-content">
-                    <input type='checkbox' />
-                    <div className="note-content">
-                        <p>{props.item.header}</p>
+                timeout={2300}
+                onEnter={() => { setShowMessage(false) }}
+            >
+                <div id={props.item._id} onClick={() => { }} className={'note'}>
+                    {console.log(props.key)}
+                    <div className="container-content">
+                        <input type='checkbox' />
+                        <div className="note-content">
+                            <p>{props.item.header}</p>
+                        </div>
+                        <button onClick={() => { setShowMessage(true); }} className="btn-del"><img alt="button delete" src={del} /></button>
                     </div>
-                    <button onClick={() => { setShowMessage(true); alert(showMessage); }} className="btn-del"><img alt="button delete" src={del} /></button>
                 </div>
-            </div>
-            {/* </CSSTransition > */}
+            </CSSTransition >
         </Container>
 
     )

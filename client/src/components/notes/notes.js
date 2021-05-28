@@ -61,16 +61,7 @@ function Notes(props) {
 
         return (
             <div className="notes">
-                <TransitionGroup>
-                    <CSSTransition
-                        in={false}
-                        classNames='bla'
-                        timeout={300}
-                        onEnter={() => { alert('111'); }}
-                    >
-                        {listItems}
-                    </CSSTransition>
-                </TransitionGroup>
+                {listItems}
             </div>
         )
     } else {
