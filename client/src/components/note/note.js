@@ -38,15 +38,10 @@ function Note(props) {
                 'Content-Type': 'application/json;charset=utf-8'
             },
             body: JSON.stringify({ 'id': id, 'header': header, 'value': value })
-        });
+        })
     }
 
     return (
-            <CSSTransition
-                in={showMessage}
-                classNames='bla'
-                timeout={400}
-                onEnter={() => { setShowMessage(false) }}>
                 <div id={props.item._id}  className={'note'}>
                     <div className="container-content">
                         <input type='checkbox'/>
@@ -56,7 +51,6 @@ function Note(props) {
                         <button onClick={() => { setShowMessage(true); deleteNote(props.item._id)}} className="btn-del"><img alt="button delete" src={del} /></button>
                     </div>
                 </div>
-                </CSSTransition >
     )
 }
 

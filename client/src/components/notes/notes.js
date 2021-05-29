@@ -23,22 +23,35 @@ function Notes(props) {
 
     if (props.notes.length != 0) {
         return (
+   
             <TransitionGroup className="notes">
-                {props.testStore.reduser[0].map((number, index) =>
-            <Note key={index} item={number} ></Note>)}
+                {
+                    props.testStore.reduser[0].map((number, index) =>
+                        {
+                            return(
+                                <CSSTransition
+                                    key={number._id} 
+                                    timeout={800}
+                                    classNames='item'
+                                >
+                                    <Note key={index} item={number}></Note>
+                                </CSSTransition>
+                            )
+                        })
+                     }
             </TransitionGroup>
+            
         )
     } else {
         return (
             <div>
                 <ul>
-                    <p >Лоадинг , плис вейт</p>
+                    <p>Лоадинг , плис вейт</p>
                 </ul>
             </div>
         )
     }
 }
-
 
 export default connect(
     state => ({

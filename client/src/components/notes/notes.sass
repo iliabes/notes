@@ -11,3 +11,29 @@
     margin-top: 10px
     overflow: hidden
 
+
+.item-enter 
+  opacity: 0
+
+.item-enter-active 
+  opacity: 1
+  transition: opacity 500ms ease-in
+
+.item-exit 
+     opacity: 0
+
+.item-exit-active 
+  animation: animation .8s linear 
+
+
+
+@keyframes animation 
+  0%  
+    transform: translateX(0px)
+  25% 
+    opacity: 1
+  75%  
+    opacity: .4
+  100% 
+    opacity: 0
+    transform: translateX(1400px)

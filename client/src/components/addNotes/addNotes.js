@@ -56,7 +56,6 @@ function NotesAdd(props) {
     return (
       <div className='cont-add-notes'>
         <input className='note-input' onClick={() => { setClick(1) }} type='text' placeholder="Заголовок.."></input>
-        {/* <Button className="add-button" onClick={() => { setClick(1) }}></Button> */}
       </div>
     )
   }
@@ -74,7 +73,7 @@ export default connect(
       dispatch({ type: 'START_UPDATE' });
     }
   })
-)(NotesAdd);
+)(NotesAdd)
 
 
 
@@ -91,5 +90,4 @@ export default connect(
 //     data:JSON.stringify({"header":data.header,"value":data.value})
 //   });
 //   }
-
 // }
