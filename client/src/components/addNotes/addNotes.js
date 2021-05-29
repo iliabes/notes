@@ -47,7 +47,7 @@ function NotesAdd(props) {
         </div>
         <div className='cont-add-notes overlay'>
           <input onChange={function bla(e) { data.header = e.target.value; console.log(data) }} className='note-input note-input-header' type='text' placeholder="Заметка.."></input>
-          <input onChange={function bla(e) { data.value = e.target.value; console.log(data) }} className='note-input note-input-content' type='text' placeholder="Заметка.."></input>
+          <button className="add-button" onClick={(e)=>{data.header = e.target.value; console.log(data) ;createNote()}}>✔️</button>
         </div>
 
       </>
@@ -56,7 +56,7 @@ function NotesAdd(props) {
     return (
       <div className='cont-add-notes'>
         <input className='note-input' onClick={() => { setClick(1) }} type='text' placeholder="Заголовок.."></input>
-        <ButtonAdd onClick={() => { setClick(1) }}></ButtonAdd>
+        {/* <Button className="add-button" onClick={() => { setClick(1) }}></Button> */}
       </div>
     )
   }
