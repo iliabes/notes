@@ -4,12 +4,18 @@ let mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 let Todo = require('../cheme/myMongooseScheme')
 let change = 0;
+const path = require('path');
 
 //get all items
 router.get('/bd', (req, res) => {
   Todo.find({}, (err, data) => {
     res.json(data)
   })
+})
+
+router.use('/pixi', (req, res) => {
+  console.log('startinf')
+  res.sendFile(path.resolve(__dirname + "./../pixi/index.html"));
 })
 
 router.post('/subscribe', (req, res) => {
@@ -49,6 +55,9 @@ router.delete('/', (req, res) => {
     console.log(result);
     res.json({ 'ok': 'ok' })
   });
+
+
+
 
 })
 

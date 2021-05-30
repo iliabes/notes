@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "nodemon app.js",
     "all": "concurrently \"nodemon app.js\" \"npm run start --prefix client\" "
   },
   "dependencies": {
@@ -20,6 +20,7 @@
     "mongoose": "^5.12.6",
     "morgan": "~1.9.1",
     "node-sass": "^5.0.0",
+    "path": "^0.12.7",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
     "redux": "^4.1.0",
