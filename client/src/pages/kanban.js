@@ -2,7 +2,7 @@ import React from 'react'
 import InputLine from '../components/topNav/topNav'
 import * as PIXI from 'pixi.js'
 import axios from 'axios';
-let textTest;
+
 
 
 
@@ -31,7 +31,6 @@ export const Kanban = () => {
   async function getNotes() {
     const result = await axios('/bd');
     console.log(result.data[0].header)
-    textTest = result
     let text2 = new PIXI.Text(result.data[0].header, { fontFamily: 'Arial', fontSize: 24, fill: 0xff1010, align: 'center' });
     app.stage.addChild(text2);
   } getNotes()

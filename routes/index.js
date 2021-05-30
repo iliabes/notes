@@ -24,7 +24,6 @@ router.post('/', (req, res) => {
   const obj = JSON.parse(JSON.stringify(req.body))// req.body = [Object: null prototype] { title: 'product' }
   let todo = new Todo({
     header: req.body.header,
-    value: req.body.value,
   });
   todo.save(() => {
     console.log('save', todo)

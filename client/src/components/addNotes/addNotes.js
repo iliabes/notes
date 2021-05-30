@@ -1,44 +1,41 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux'
 import './inputLine.sass'
-import ButtonAdd from '../buttonAddNotes/buttonAdd'
-import { RefreshState } from '../../context/RefreshContext'
-import axios from 'axios';
+
 
 
 
 
 function NotesAdd(props) {
-  console.log(props)
-  const init = useContext(RefreshState);
   const [click, setClick] = useState(0);
-  let data = {
-    header: '',
-    value: ''
-  }
-
-  async function getNotes() {
-    const result = await axios('/bd');
-    props.getAllnotes(result.data)
-  }
+  let dataNote = ''
+  useEffect(() => {
+    window.addEventListener('keydown', (event) => {
+      if (event.code === 'Enter' && click === 1 && dataNote !== '') {
+        createNote()
+      }
+    });
+  })
 
   async function createNote() {
-    if (data.header || data.value) {
+    if (dataNote) {
       await fetch('http://localhost:4000', {
         method: 'post',
         headers: {
           'Content-Type': 'application/json;charset=utf-8'
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify({ 'header': dataNote })
       })
-        .then((data) => {
+        .then((dataNote) => {
           props.startUpdate()
-          console.log(data)
+          setClick(0)
         })
     }
-    console.log(props)
   }
 
+  function getDateNote(e) {
+    dataNote = e.target.value;
+  }
 
   if (click) {
     return (
@@ -46,10 +43,10 @@ function NotesAdd(props) {
         <div onClick={() => { setClick(0); createNote() }} className="add-notes-overlay ">
         </div>
         <div className='cont-add-notes overlay'>
-          <input onChange={function bla(e) { data.header = e.target.value; console.log(data) }} className='note-input note-input-header' type='text' placeholder="Заметка.."></input>
-          <button className="add-button" onClick={(e)=>{data.header = e.target.value; console.log(data) ;createNote()}}>✔️</button>
+          <input onChange={(e) => { getDateNote(e) }} className='note-input note-input-header' type='text' placeholder="Заметка.."></input>
+          <button className="add-button" onClick={(e) => { createNote() }}>✔️</button>
+          <button className="add-button" onClick={(e) => { setClick(0) }}>❌</button>
         </div>
-
       </>
     )
   } else {
@@ -62,13 +59,8 @@ function NotesAdd(props) {
 }
 
 export default connect(
-  state => ({
-    testStore: state
-  }),
+  state => ({}),
   dispatch => ({
-    getAllnotes: (notes) => {
-      dispatch({ type: 'GET_NOTES', payload: notes });
-    },
     startUpdate: () => {
       dispatch({ type: 'START_UPDATE' });
     }

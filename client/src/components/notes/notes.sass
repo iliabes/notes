@@ -1,39 +1,38 @@
 .notes
-    width: 90%
-    margin: 0 auto
-    flex-grow: 5
-    display: flex
-    flex-direction: column
-    flex-wrap: wrap
-    justify-content: space-between
-    flex-basis: 50%
-    gap: 10px
-    margin-top: 10px
-    overflow: hidden
+  width: 90%
+  margin: 0 auto
+  flex-grow: 5
+  display: flex
+  flex-direction: column
+  flex-wrap: wrap
+  justify-content: space-between
+  flex-basis: 50%
+  gap: 10px
+  margin-top: 10px
+  overflow: hidden
 
-
-.item-enter 
+  //appear
+.item-enter
   opacity: 0
 
-.item-enter-active 
+.item-enter-active
   opacity: 1
   transition: opacity 500ms ease-in
 
-.item-exit 
-     opacity: 0
+//disappear
+.item-exit-active
+  animation: animation .6s linear
 
-.item-exit-active 
-  animation: animation .8s linear 
+.item-exit-done
+  display: none
 
-
-
-@keyframes animation 
-  0%  
-    transform: translateX(0px)
-  25% 
+@keyframes animation
+  0%
+    transform: scale(1)
     opacity: 1
-  75%  
-    opacity: .4
-  100% 
+    transform: translateX(0px)
+  30%
+    transform: scale(.8)
+  99%
     opacity: 0
     transform: translateX(1400px)

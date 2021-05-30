@@ -1,6 +1,5 @@
 import React, { useReducer } from 'react';
 import reducer from './redeser';
-import redeser from './redeser'
 import { RefreshState } from './RefreshContext'
 
 

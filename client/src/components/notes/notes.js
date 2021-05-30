@@ -1,46 +1,51 @@
 import { store } from '../../redux/index'
 import { connect } from 'react-redux'
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import axios from 'axios';
 import Note from '../note/note'
 import './notes.sass'
 
 
-async function getNotes() {
-    const result = await axios('/bd');
-    console.log('result.data', result.data)
-    store.dispatch({ type: 'GET_NOTES', payload: result.data });
-    console.log('result.data', result.data)
-}getNotes()
+
 
 function Notes(props) {
-    console.log(props.updateStateNotes)
+    useEffect(() => {
+        getNotes()
+    }, [])
+
+    async function getNotes() {
+        const result = await axios('/bd');
+        store.dispatch({ type: 'GET_NOTES', payload: result.data });
+    }
+
+
     if (props.updateStateNotes) {
+        console.log('blablabla')
         getNotes()
         props.stopUpdate()
     }
 
-    if (props.notes.length != 0) {
+
+    if (props.notes.length !== 0) {
+        let items = props.notes[0].map((number, index) => {
+            return (
+                <CSSTransition
+                    key={number._id}
+                    timeout={600}
+                    classNames='item'
+                >
+                    <Note key={index} item={number}></Note>
+                </CSSTransition>
+            )
+        })
         return (
-   
             <TransitionGroup className="notes">
                 {
-                    props.testStore.reduser[0].map((number, index) =>
-                        {
-                            return(
-                                <CSSTransition
-                                    key={number._id} 
-                                    timeout={800}
-                                    classNames='item'
-                                >
-                                    <Note key={index} item={number}></Note>
-                                </CSSTransition>
-                            )
-                        })
-                     }
+                    items
+                }
             </TransitionGroup>
-            
+
         )
     } else {
         return (
@@ -55,7 +60,6 @@ function Notes(props) {
 
 export default connect(
     state => ({
-        testStore: state,
         notes: state.reduser,
         updateStateNotes: state.updatee
     }),
