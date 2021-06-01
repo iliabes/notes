@@ -1,0 +1,71 @@
+[33mcommit ac3c7d9dbc0c35b4ba1b9327ec119c41e9a732ab[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: iliabes <oksana14888@gmail.com>
+Date:   Sun May 30 14:26:07 2021 +0300
+
+    fix components note , notes , addNote
+
+[33mcommit b617dcb063a0b79504bd8cccc31c8fadabf2d140[m
+Author: f0rGetFull <f0rgetful@yandex.ru>
+Date:   Sat May 29 14:20:51 2021 +0300
+
+    animate appear and dissapear
+
+[33mcommit 8a3be2e61d99cec581b30452043e5e96f75253c5[m
+Author: f0rGetFull <f0rgetful@yandex.ru>
+Date:   Sat May 29 12:05:55 2021 +0300
+
+    fix animate1
+
+[33mcommit 8402219e1b0d8ed3c913edb00ceff066a941673f[m
+Author: iliabes <oksana14888@gmail.com>
+Date:   Fri May 28 22:20:26 2021 +0300
+
+    finaly fix animate
+
+[33mcommit 7b8aff1c4c8b9cedf9d096e6687ca21abb591101[m
+Author: iliabes <oksana14888@gmail.com>
+Date:   Thu May 27 18:53:43 2021 +0300
+
+    dont work animate witch redux
+
+[33mcommit e1b0a279dc61184f96add213f497b301d1cfa50b[m
+Author: iliabes <oksana14888@gmail.com>
+Date:   Mon May 24 17:43:59 2021 +0300
+
+    react-transition-group
+
+[33mcommit 2ebdb3ffefb9c380822a3005217b18058ac2b57a[m
+Author: f0rGetFull <f0rgetful@yandex.ru>
+Date:   Mon May 24 01:01:26 2021 +0300
+
+    moving note
+
+[33mcommit 699911fb7f167b46198787151f70aa8c6ce8fed8[m
+Author: iliabes <oksana14888@gmail.com>
+Date:   Sun May 23 18:40:46 2021 +0300
+
+    corrected canvas
+
+[33mcommit a42c1bbd2bd1097a77c357024960cf7699cf2805[m
+Author: f0rGetFull <f0rgetful@yandex.ru>
+Date:   Sun May 23 02:10:56 2021 +0300
+
+    work commit
+
+[33mcommit 03e566ea6b896ceec49812fc4fe95972dbbad229[m
+Author: iliabes <oksana14888@gmail.com>
+Date:   Sat May 22 19:04:33 2021 +0300
+
+    asd
+
+[33mcommit cdf8c61cb66090eff83ccbf9135dfbc769357588[m
+Author: iliabes <oksana14888@gmail.com>
+Date:   Sun May 2 18:24:18 2021 +0300
+
+    asd
+
+[33mcommit f95492b85753d89d1036111e06a5f76b01203471[m
+Author: iliabes <oksana14888@gmail.com>
+Date:   Sun Apr 25 02:45:22 2021 +0300
+
+    + grud
