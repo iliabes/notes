@@ -16,7 +16,6 @@ app.use(express.json())
 app.use(express.static(__dirname + '/pixi'))
 
 
-
 app.use('/', indexRouter);
 
 
