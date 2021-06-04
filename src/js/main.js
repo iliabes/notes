@@ -1,13 +1,13 @@
-import  Container  from '@pixi/display'
-
-
-
-
+import * as PIXI from 'pixi.js'
+import notes from './notes'
 
 const app = new PIXI.Application({
-  width: window.innerWidth, height: 600, backgroundColor: 0x1099bb, resolution: window.devicePixelRatio || 1,
-})
-
+  width: window.innerWidth,
+  height: 1280,
+  backgroundColor: 0x1099bb,
+  view: document.querySelector('#scene'),
+  resolution: window.devicePixelRatio || 1
+});
 
 
 let listNotes = notes.map((item)=>{
@@ -23,8 +23,6 @@ listNotes.forEach((element,index) => {
 })
 
 
-
-
 document.body.appendChild(app.view);
 
 
@@ -34,8 +32,3 @@ async function getNotes() {
   let text2 = new PIXI.Text(result.data[0].header, { fontFamily: 'Arial', fontSize: 24, fill: 0xff1010, align: 'center' });
   app.stage.addChild(text2);
 }
-
-
-
-
-
